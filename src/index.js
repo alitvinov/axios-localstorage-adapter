@@ -81,10 +81,9 @@ async function requestGet(config) {
                 cachedData = data;
             }
 
-            // only cache it when `typeof data === 'string'` or `data.status === 0` or `data.code === 0`
+            // only cache it when data is string or object
             if (
-                typeof cachedData === 'string' ||
-                (typeof cachedData === 'object' && (cachedData.status === 0 || cachedData.code === 0))
+                typeof cachedData === 'string' || typeof cachedData === 'object'
             ) {
                 try {
                     const lastModified = new Date().getTime();
