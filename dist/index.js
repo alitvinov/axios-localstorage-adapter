@@ -53,7 +53,7 @@ function _asyncToGenerator(fn) {
 }
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
 function _arrayWithHoles(arr) {
@@ -61,10 +61,7 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-    return;
-  }
-
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -90,8 +87,25 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
 function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 /**
@@ -181,9 +195,7 @@ function requestGet(_x) {
 
 
 function _requestGet() {
-  _requestGet = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(config) {
+  _requestGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(config) {
     var res, data, cachedData, lastModified, V_URL_NEW, V_LAST_MODIFIED_NEW;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -202,10 +214,10 @@ function _requestGet() {
                 cachedData = JSON.parse(data);
               } catch (e) {
                 cachedData = data;
-              } // only cache it when `typeof data === 'string'` or `data.status === 0` or `data.code === 0`
+              } // only cache it when data is string or object
 
 
-              if (typeof cachedData === 'string' || _typeof(cachedData) === 'object' && (cachedData.status === 0 || cachedData.code === 0)) {
+              if (typeof cachedData === 'string' || _typeof(cachedData) === 'object') {
                 try {
                   lastModified = new Date().getTime();
                   V_URL_NEW = JSON.stringify({
@@ -249,9 +261,7 @@ function cacheAdapter(_x2) {
 
 
 function _cacheAdapter() {
-  _cacheAdapter = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(config) {
+  _cacheAdapter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(config) {
     var url, _config$params, params, method, K_URL, V_URL, lastRequst, response;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
