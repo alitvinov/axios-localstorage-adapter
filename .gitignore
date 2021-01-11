@@ -3872,3 +3872,4 @@ node_modules/unicode-property-aliases-ecmascript/LICENSE-MIT.txt
 node_modules/unicode-property-aliases-ecmascript/package.json
 node_modules/unicode-property-aliases-ecmascript/README.md
 dist/index.js
+yarn.lock
