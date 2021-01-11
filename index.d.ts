@@ -13,4 +13,5 @@ interface AxiosLocalStorageAdapterOptions {
     cache?: boolean
 }
 
-export declare function AxiosLocalStorageAdapter(opts: AxiosLocalStorageAdapterOptions): AxiosAdapter
+declare function AxiosLocalStorageAdapter(opts: AxiosLocalStorageAdapterOptions): AxiosAdapter;
+export default AxiosLocalStorageAdapter;
